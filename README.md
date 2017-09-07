@@ -3,7 +3,7 @@
 #### Kotlin 컴파일 속도
 - 대개 Java보다 조금 빠르다!
 - 클린 빌드 시에는 Java보다 조금 느리지만, 일반적인 개발 시나리오의 증분 빌드 시 성능이 좋다.
-- (Kotlin vs Java: Compilation speed) https://medium.com/keepsafe-engineering/kotlin-vs-java-compilation-speed-e6c174b39b5d
+- [Kotlin vs Java: Compilation speed](https://medium.com/keepsafe-engineering/kotlin-vs-java-compilation-speed-e6c174b39b5d)
 
 #### 세미콜론(;) 안녕
 - 더 이상 세미콜론은 필요가 없다.
