@@ -147,7 +147,7 @@ when (x) {
 ## 클래스
 ### Data 클래스
 - 모든 Field의 Getter/Setter를 제공
-- equals()/hashCode()/toString()/copy() 구현 제공
+- equals() / hashCode() / toString() / copy() 구현을 아름답게 제공
 ```kotlin
 data class Customer(val name: String, val email: String)
 ```
