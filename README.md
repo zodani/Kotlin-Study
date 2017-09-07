@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
 ```kotlin
 fun main(args: Array<String>) {
     val age: Int = 30
-    a = 20 // 실패
+    a = 20 // 실패
 }
 ```
 - var : 값 변경 가능 (read-write)
@@ -36,7 +36,7 @@ fun main(args: Array<String>) {
 ```kotlin
 fun demo(x: Any) {
     if (x is String) {
-        print(x.length) // x가 자동으로 String으로 형변환 된다.
+        print(x.length) // x가 자동으로 String으로 형변환 된다.
     }
 }
 ```
@@ -44,8 +44,8 @@ fun demo(x: Any) {
 ```kotlin
 fun demo1(x: String?) {
     if (x != null) {
-        demo2(x) // x가 자동으로 NonNull String으로 형변환 된다.
-    }
+        demo2(x) // x가 자동으로 NonNull String으로 형변환 된다.
+    }
 }
 
 fun demo2(x: String) {
@@ -145,9 +145,49 @@ when (x) {
 }
 ```
 ## 클래스
+### 클래스 기본
+```kotlin
+class Invoice {
+}
+```
+- 바디가 없을 때 {} 생략가능
+```kotlin
+class Empty
+```
+- 생성자 표현 (constructor 키워드)
+```kotlin
+class Person constructor(firstName: String) {
+}
+```
+- 생성자 표현에 constructor 키워드 생략 가능
+```kotlin
+class Person(firstName: String) {
+}
+```
+- 생성자의 초기화 블록 지정 (init 키워드)
+```kotlin
+class Customer(name: String) {
+    init {
+        logger.info("Customer initialized with value ${name}")
+    }
+}
+```
+- 위 표현을 아래와 같이 표현 가능 (동일)
+```kotlin
+class Customer {
+    constructor(name: String) {
+		logger.info("Customer initialized with value ${name}")
+    }
+}
+```
+- @Inject 어노테이션이 필요하면 constructor 키워드가 필요하다.
+```kotlin
+class Customer public @Inject constructor(name: String) { ... }
+```
 ### Data 클래스
-- 모든 Field의 Getter/Setter를 제공
+- 모든 var, val 변수의 Getter 제공
+- 모든 var 변수의 Setter를 제공
 - equals() / hashCode() / toString() / copy() 구현을 아름답게 제공
 ```kotlin
-data class Customer(val name: String, val email: String)
+data class Customer(val name: String, var email: String)
 ```
