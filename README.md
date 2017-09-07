@@ -16,14 +16,14 @@ fun main(args: Array<String>) {
 ```
 
 ### 변수는 모두 val 아니면 var
-- val : 값이 불변하는 상수 변수
+- val : 값 변경 불가능 (read-only)
 ```java
 fun main(args: Array<String>) {
     val age: Int = 30
     a = 20 // a는 read-only라 수정할 수 없다.
 }
 ```
-- var : 값이 바뀌는 변수
+- var : 값 변경 가능 (read-write)
 ```java
 fun main(args: Array<String>) {
     var age: Int = 30
