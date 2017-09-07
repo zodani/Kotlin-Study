@@ -110,7 +110,6 @@ item at 2 is kiwi
 ### When
 - 다양한 타입 비교
 ```java
-fun describe(obj: Any): String =
 when (obj) {
     1          -> "One"
     "Hello"    -> "Greeting"
