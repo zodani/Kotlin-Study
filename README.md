@@ -71,3 +71,23 @@ fun maxOf(a: Int, b: Int): Int = if (a > b) a else b
 ```java
 fun maxOf(a: Int, b: Int) = if (a > b) a else b
 ```
+### For-Loop
+- List
+```java
+val items = listOf("apple", "banana", "kiwi")
+for (index in items.indices) {
+    println("item at $index is ${items[index]}")
+}
+
+item at 0 is apple
+item at 1 is banana
+item at 2 is kiwi
+```
+- Range (a...b)
+```java
+for (i in 0..10) { 
+    print(i)
+}
+
+012345678910
+```
