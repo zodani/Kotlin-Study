@@ -32,7 +32,7 @@ fun main(args: Array<String>) {
 ```
 
 ### 자동 형변환 (Smart Casts)
-- is 체크 후에는 자동 형변환이 된다. (Java의 instanceof)
+- is 체크 후 (Java의 instanceof)
 ```java
 fun demo(x: Any) {
     if (x is String) {
@@ -40,7 +40,7 @@ fun demo(x: Any) {
     }
 }
 ```
-- null 체크 후에는 자동 형변환이 된다.
+- null 체크 후
 ```java
 fun demo1(x: String?) {
     if (x != null) {
