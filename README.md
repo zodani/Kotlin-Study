@@ -27,7 +27,7 @@ fun main(args: Array<String>) {
 ```java
 fun main(args: Array<String>) {
     var age: Int = 30
-	a = 20 // 대입 성공
+    a = 20 // 대입 성공
 }
 ```
 
@@ -51,4 +51,23 @@ fun demo1(x: String?) {
 fun demo2(x: String) {
     print(x.length)
 }
+```
+### 함수 값 리턴의 간략화
+- 일반적인 함수 정의
+```java
+fun maxOf(a: Int, b: Int): Int {
+    if (a > b) {
+        return a
+    } else {
+        return b
+    }
+}
+```
+- 간략하게 표현
+```java
+fun maxOf(a: Int, b: Int): Int = if (a > b) a else b
+```
+- 더 간략하게 표현 (리턴 타입을 생략해도 추론 가능)
+```java
+fun maxOf(a: Int, b: Int) = if (a > b) a else b
 ```
