@@ -7,7 +7,7 @@
 
 ### 세미콜론(;) 안녕
 - 더 이상 세미콜론은 필요가 없다.
-```java
+```kotlin
 fun main(args: Array<String>) {
     val age = 30
     val name: String = "Seo Jaeryong"
@@ -17,14 +17,14 @@ fun main(args: Array<String>) {
 
 ### 변수는 모두 val 아니면 var
 - val : 값 변경 불가능 (read-only)
-```java
+```kotlin
 fun main(args: Array<String>) {
     val age: Int = 30
     a = 20 // 실패
 }
 ```
 - var : 값 변경 가능 (read-write)
-```java
+```kotlin
 fun main(args: Array<String>) {
     var age: Int = 30
     a = 20 // 성공
@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
 
 ### 자동 형변환 (Smart Casts)
 - is 체크 후 (Java의 instanceof)
-```java
+```kotlin
 fun demo(x: Any) {
     if (x is String) {
         print(x.length) // x가 자동으로 String으로 형변환 된다.
@@ -41,7 +41,7 @@ fun demo(x: Any) {
 }
 ```
 - null 체크 후
-```java
+```kotlin
 fun demo1(x: String?) {
     if (x != null) {
         demo2(x) // x가 자동으로 NonNull String으로 형변환 된다.
@@ -54,7 +54,7 @@ fun demo2(x: String) {
 ```
 ### 함수 값 리턴의 간략화
 - 일반적인 함수 정의
-```java
+```kotlin
 fun maxOf(a: Int, b: Int): Int {
     if (a > b) {
         return a
@@ -64,16 +64,16 @@ fun maxOf(a: Int, b: Int): Int {
 }
 ```
 - 간략하게 표현
-```java
+```kotlin
 fun maxOf(a: Int, b: Int): Int = if (a > b) a else b
 ```
 - 더 간략하게 표현 (리턴 타입을 생략해도 추론 가능)
-```java
+```kotlin
 fun maxOf(a: Int, b: Int) = if (a > b) a else b
 ```
 ### For-Loop
 - List
-```java
+```kotlin
 val items = listOf("apple", "banana", "kiwi")
 for (index in items.indices) {
     println("item at $index is ${items[index]}")
@@ -85,7 +85,7 @@ item at 1 is banana
 item at 2 is kiwi
 ```
 - Range (a...b)
-```java
+```kotlin
 for (i in 0..10) { 
     print(i)
 }
@@ -94,7 +94,7 @@ for (i in 0..10) {
 012345678910
 ```
 ### While-Loop
-```java
+```kotlin
 val items = listOf("apple", "banana", "kiwi")
 var index = 0
 while (index < items.size) {
@@ -109,7 +109,7 @@ item at 2 is kiwi
 ```
 ### When
 - 다양한 타입 비교
-```java
+```kotlin
 when (obj) {
     1          -> "One"
     "Hello"    -> "Greeting"
@@ -119,7 +119,7 @@ when (obj) {
 }
 ```
 - {} 블록을 지정해서 작성
-```java
+```kotlin
 when (x) {
     1 -> print("x == 1")
     2 -> print("x == 2")
@@ -129,18 +129,25 @@ when (x) {
 }
 ```
 - 한 조건에 여러 값을 비교 (0, 1)
-```java
+```kotlin
 when (x) {
     0, 1 -> print("x == 0 or x == 1")
     else -> print("otherwise")
 }
 ```
 - 범위 비교
-```java
+```kotlin
 when (x) {
     in 1..10 -> print("x is in the range")
     in validNumbers -> print("x is valid")
     !in 10..20 -> print("x is outside the range")
     else -> print("none of the above")
 }
+```
+## 클래스
+### Data 클래스
+- 모든 Field의 Getter/Setter를 제공
+- equals()/hashCode()/toString()/copy() 구현 제공
+```kotlin
+data class Customer(val name: String, val email: String)
 ```
