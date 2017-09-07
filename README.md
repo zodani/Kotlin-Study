@@ -20,14 +20,14 @@ fun main(args: Array<String>) {
 ```java
 fun main(args: Array<String>) {
     val age: Int = 30
-    a = 20 // a는 read-only라 수정할 수 없다.
+    a = 20 // 실패
 }
 ```
 - var : 값 변경 가능 (read-write)
 ```java
 fun main(args: Array<String>) {
     var age: Int = 30
-    a = 20 // 대입 성공
+    a = 20 // 성공
 }
 ```
 
