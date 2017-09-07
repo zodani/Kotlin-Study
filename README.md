@@ -79,6 +79,7 @@ for (index in items.indices) {
     println("item at $index is ${items[index]}")
 }
 
+결과
 item at 0 is apple
 item at 1 is banana
 item at 2 is kiwi
@@ -89,5 +90,6 @@ for (i in 0..10) {
     print(i)
 }
 
+결과
 012345678910
 ```
