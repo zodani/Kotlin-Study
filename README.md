@@ -1,4 +1,4 @@
-# Kotlin-Study
+<img src="https://cdn.worldvectorlogo.com/logos/kotlin-2.svg">
 
 ### Kotlin 컴파일 속도
 - 대개 Java보다 조금 빠르다!
@@ -92,4 +92,56 @@ for (i in 0..10) {
 
 결과
 012345678910
+```
+### While-Loop
+```java
+val items = listOf("apple", "banana", "kiwi")
+var index = 0
+while (index < items.size) {
+    println("item at $index is ${items[index]}")
+    index++
+}
+
+결과
+item at 0 is apple
+item at 1 is banana
+item at 2 is kiwi
+```
+### When
+- 다양한 타입 비교
+```java
+fun describe(obj: Any): String =
+when (obj) {
+    1          -> "One"
+    "Hello"    -> "Greeting"
+    is Long    -> "Long"
+    !is String -> "Not a string"
+    else       -> "Unknown"
+}
+```
+- {} 블록을 지정해서 작성
+```java
+when (x) {
+    1 -> print("x == 1")
+    2 -> print("x == 2")
+    else -> { // Note the block
+        print("x is neither 1 nor 2")
+    }
+}
+```
+- 한 조건에 여러 값을 비교 (0, 1)
+```java
+when (x) {
+    0, 1 -> print("x == 0 or x == 1")
+    else -> print("otherwise")
+}
+```
+- 범위 비교
+```java
+when (x) {
+    in 1..10 -> print("x is in the range")
+    in validNumbers -> print("x is valid")
+    !in 10..20 -> print("x is outside the range")
+    else -> print("none of the above")
+}
 ```
