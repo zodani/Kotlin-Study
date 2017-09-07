@@ -7,10 +7,29 @@
 
 #### 세미콜론(;) 안녕
 - 더 이상 세미콜론은 필요가 없다.
+```java
+fun main(args: Array<String>) {
+    val age = 30
+    val name: String = "Seo Jaeryong"
+    println(name.length)
+}
+```
 
-#### 변수는 모두 var 아니면 val
-- var : 값이 바뀌는 변수
+#### 변수는 모두 val 아니면 var
 - val : 값이 불변하는 상수 변수
+```java
+fun main(args: Array<String>) {
+	val age: Int = 30
+    a = 20 // a는 read-only라 수정할 수 없다.
+}
+```
+- var : 값이 바뀌는 변수
+```java
+fun main(args: Array<String>) {
+	var age: Int = 30
+    a = 20 // 대입 성공
+}
+```
 
 #### 자동 형변환 (Smart Casts)
 - is 또는 null 체크 후에는 자동 형변환이 된다.
