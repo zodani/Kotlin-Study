@@ -145,7 +145,7 @@ when (x) {
 }
 ```
 ## 클래스
-### 클래스 기본
+### 클래스 표현
 ```kotlin
 class Invoice {
 }
@@ -190,4 +190,12 @@ class Customer public @Inject constructor(name: String) { ... }
 - equals() / hashCode() / toString() / copy() 구현을 아름답게 제공
 ```kotlin
 data class Customer(val name: String, var email: String)
+```
+### Open 클래스
+- 코틀린의 모든 클래스는 기본적으로 final이라 상속이 불가능하다.
+- open 키워드를 class 앞에 붙여줌으로써 상속을 허용시킨다.
+```kotlin
+open class Base(p: Int)
+
+class Derived(p: Int) : Base(p)
 ```
