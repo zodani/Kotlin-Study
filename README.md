@@ -144,6 +144,19 @@ when (x) {
     else -> print("none of the above")
 }
 ```
+### infix notation(중위 표기법)
+- 함수앞에 infix를 붙인다.
+- 멤버함수 혹은 확장 함수([extension funtions](https://kotlinlang.org/docs/reference/extensions.html))에 사용
+- 하나의 파라미터를 받는 함수에서 사용
+```kotlin
+// 정의 방법
+infix fun Int.shl(x: Int): Int {
+...
+}
+
+1.shl(2)
+1 shl 2 // can also be called like this
+```
 ## 클래스
 ### 클래스 표현
 ```kotlin
