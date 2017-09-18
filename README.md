@@ -30,7 +30,18 @@ fun main(args: Array<String>) {
     a = 20 // 성공
 }
 ```
-
+### 접근자
+- `public (default)` : 전역 프로젝트에 공개
+- `private` : 같은 파일내에 공개
+- `protected` : Subclasses에 공개
+- `internal` : 같은 Module내에 공개
+```
+Module이란?
+- IntelliJ an IntelliJ IDEA module
+- a Maven project
+- a Gradle source set
+- a set of files compiled with one invocation of the Ant task.
+```
 ### 자동 형변환 (Smart Casts)
 - is 체크 후 (Java의 instanceof)
 ```kotlin
@@ -151,16 +162,34 @@ when (x) {
 ```kotlin
 // 정의 방법
 infix fun Int.shl(x: Int): Int {
-...
+    ...
 }
 
 1.shl(2)
 1 shl 2 // can also be called like this
 ```
+### Extensions
+- 클래스에 함수 확장
+```kotlin
+// ViewExt.kt
+fun View.show() {
+    visibility = View.VISIBLE
+}
+
+fun View.hide() {
+    visibility = View.GONE
+}
+
+// SearchActivity.kt
+var textView = findViewById(R.id.textView) as TextView
+textView.show() // ok
+textView.hide() // ok
+```
 ## 클래스
 ### 클래스 표현
 ```kotlin
 class Invoice {
+
 }
 ```
 - 바디가 없을 때 {} 생략가능
@@ -170,11 +199,13 @@ class Empty
 - 생성자 표현 (constructor 키워드)
 ```kotlin
 class Person constructor(firstName: String) {
+
 }
 ```
 - 생성자 표현에 constructor 키워드 생략 가능
 ```kotlin
 class Person(firstName: String) {
+
 }
 ```
 - 생성자의 초기화 블록 지정 (init 키워드)
@@ -211,4 +242,60 @@ data class Customer(val name: String, var email: String)
 open class Base(p: Int)
 
 class Derived(p: Int) : Base(p)
+```
+### Abstract 클래스
+- Java와 비슷
+```kotlin
+abstract class Base {
+    abstract fun f()
+}
+
+class Derived() : Base() {
+    override fun f() {
+        // ...
+    }
+}
+```
+### Nested 클래스
+- Outer클래스 멤버 참조가 `불가능`
+```kotlin
+class Outer {
+    private val bar: Int = 1
+    class Nested {
+        fun foo() = 2 // bar 참조 불가
+    }
+}
+
+val demo = Outer.Nested().foo() // == 2
+```
+### Inner 클래스
+- Outer클래스 멤버 참조 `가능`
+```kotlin
+class Outer {
+    private val bar: Int = 1
+    inner class Inner {
+        fun foo() = bar // bar 참조 가능
+    }
+}
+
+val demo = Outer().Inner().foo() // == 1
+```
+### 익명 Inner 클래스
+`object`키워드를 사용하고 타입은 `interface`나 `abstract class`를 받는다.
+- `interface` : 이름 뒤에 ()를 붙이지 않는다. `View.OnClickListener`
+```kotiln
+button.setOnClickListener(object: View.OnClickListener {
+    override fun onClick(view: View) {
+        // ...
+    }
+})
+```
+- `abstract class` : 이름 뒤에 ()를 붙인다. `SimpleOnQueryTextListener()`
+```kotlin
+searchView.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
+    override fun onQueryTextSubmit(query: String): Boolean {
+        presenter.searchImage(query)
+        return false
+    }
+})
 ```
