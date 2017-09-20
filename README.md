@@ -299,3 +299,37 @@ searchView.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
     }
 })
 ```
+### Enum 클래스
+- Java와 별로 다르지 않다.
+```kotlin
+enum class Direction {
+    NORTH, SOUTH, WEST, EAST
+}
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF)
+}
+```
+### 클래스 위임 (Class Delegation)
+- by절 뒤에 오는 참조가 해당 클래스내에 private으로 저장된다.
+- by절 앞에 오는 인터페이스의 메소드를 해당 클래스내에 자동 생성한다.
+```kotiln
+interface Base {
+    fun print()
+}
+
+class BaseImpl(val x: Int) : Base {
+    override fun print() { print(x) }
+}
+
+// b가 Derived내에 private으로 저장 됨
+// Base의 메소드를 Derived내에 자동 생성한다.
+// 그 메소드들은 b를 참조하여 실행한다.
+class Derived(b: Base) : Base by b 
+
+fun main(args: Array<String>) {
+    val b = BaseImpl(10)
+    Derived(b).print() // prints 10
+}
+```
