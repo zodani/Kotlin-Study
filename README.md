@@ -312,9 +312,10 @@ enum class Color(val rgb: Int) {
 }
 ```
 ### 클래스 위임 (Class Delegation)
-- by절 뒤에 오는 참조가 해당 클래스내에 private으로 저장된다.
-- by절 앞에 오는 인터페이스의 메소드를 해당 클래스내에 자동 생성한다.
+- 해당 클래스안에 by절 `뒤`에 오는 참조가 `private으로 저장`된다.
+- 해당 클래스안에 by절 `앞`에 오는 인터페이스의 `메소드를 자동 생성`한다.
 ```kotiln
+
 interface Base {
     fun print()
 }
