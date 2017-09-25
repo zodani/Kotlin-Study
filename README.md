@@ -487,3 +487,27 @@ assertTrue(hobbies contentEquals hobbies2) // passed
 // 참고 - contentEquals는 미리 정의 된 infix함수이다.
 public infix inline fun <T> kotlin.Array<out T>.contentEquals(other: kotlin.Array<out T>): kotlin.Boolean
 ```
+### Lambdas
+```kotlin
+// example
+fun <T, R> List<T>.map(transform: (T) -> R): List<R> {
+    val result = arrayListOf<R>()
+    for (item in this)
+        result.add(transform(item))
+    return result
+}
+```
+- input 파라미터 네이밍은 자유
+```kotlin
+var ints = listOf(1,2,3,4,5)
+val doubled = ints.map { value -> value * 2 }
+```
+- `it`을 사용하면 input 파라미터 생략가능
+```kotlin
+ints.map { it * 2 }
+```
+- 사용하지 않는 파라미터는 `_`로 선언 가능
+```kotlin
+var map = mapOf("Korea" to "Seoul", "Japan" to "Tokyo")
+map.forEach { _, value -> println("$value!") }
+```
