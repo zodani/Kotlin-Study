@@ -271,7 +271,7 @@ class Customer(name: String) {
 ```kotlin
 class Customer {
     constructor(name: String) {
-		logger.info("Customer initialized with value ${name}")
+        logger.info("Customer initialized with value ${name}")
     }
 }
 ```
