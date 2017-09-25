@@ -387,10 +387,9 @@ fun main(args: Array<String>) {
 ```kotlin
 // class
 data class Person(val name: String, val age: Int)
-fun main(args: Array<String>) {
-    val (name, age) = Person("Jee-ryong", 30)
-    print("My name is $name and I am $age years old.")
-}
+
+val (name, age) = Person("Jee-ryong", 30)
+print("My name is $name and I am $age years old.")
 
 // map
 for ((key, value) in map) {
