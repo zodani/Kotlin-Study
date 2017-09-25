@@ -6,7 +6,6 @@
 - [Kotlin vs Java: Compilation speed](https://medium.com/keepsafe-engineering/kotlin-vs-java-compilation-speed-e6c174b39b5d)
 
 ### 세미콜론 제거
-- 더 이상 세미콜론은 필요가 없다.
 ```kotlin
 fun main(args: Array<String>) {
     val age = 30
@@ -16,22 +15,22 @@ fun main(args: Array<String>) {
 ```
 
 ### 변수는 모두 val 아니면 var
-- val : 값 변경 불가능 (read-only)
+- val : 변경 불가능 (read-only)
 ```kotlin
 fun main(args: Array<String>) {
     val age: Int = 30
-    a = 20 // 실패
+    a = 20 // error
 }
 ```
-- var : 값 변경 가능 (read-write)
+- var : 변경 가능 (read-write)
 ```kotlin
 fun main(args: Array<String>) {
     var age: Int = 30
-    a = 20 // 성공
+    a = 20 // ok
 }
 ```
 ### 함수 값 리턴의 간략화
-- 일반적인 함수 정의
+- 일반적인 함수
 ```kotlin
 fun maxOf(a: Int, b: Int): Int {
     if (a > b) {
@@ -65,7 +64,7 @@ a = null // error
 var b: String? = "abc"
 b = null // ok
 ```
-- '?.' operator (for nullable types)
+- '?.' operator (for nullable)
 ```kotlin
 var b: String? = "abc"
 b.length // error
@@ -86,7 +85,7 @@ if (bob != null) {
 // Kotlin
 var name: String = bob?.department?.head?.name ?: "" // ok
 ```
-- `!!` operator (for nullable types)
+- `!!` operator (for nullable)
   - for `NPE-lovers`.
 ```kotlin
 var b: String? = null
