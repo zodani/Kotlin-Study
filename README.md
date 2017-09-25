@@ -30,6 +30,58 @@ fun main(args: Array<String>) {
     a = 20 // 성공
 }
 ```
+### Nullsafe
+- Kotlin은 널 참조의 위험([The Billion Dollar Mistake](https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions))을 제거하기 위해 노력했다.
+- 아래와 같은 상황에서만 NPE(NullPointerException)를 만들 수 있다.
+  - 명시적인 `throw NullPointerException()` 호출
+  - `!!` 오퍼레이터 사용
+  - NPE를 발생시키는 외부 Java 코드 호출
+- Non-null
+```kotlin
+var a: String = "abc"
+a = null // error
+```
+- Nullable(?)
+```kotlin
+var b: String? = "abc"
+b = null // ok
+```
+- '?.' operator (for nullable types)
+```kotlin
+var b: String? = "abc"
+b.length // error
+b?.length // ok
+```
+- 여러 체인의 객체를 호출할 때 유용하다.
+```kotlin
+// Java
+String name;
+if (bob != null) {
+    if (department != null) {
+        if (head != null) {
+	    name = bob.department.head.name;
+	}
+    }
+}
+
+// Kotlin
+var name: String = bob?.department?.head?.name ?: "" // ok
+```
+- `!!` operator (for nullable types)
+  - for `NPE-lovers`.
+```kotlin
+var b: String? = null
+val l = b!!.length // ok, but throw an NPE if b is null
+```
+- Safe casts
+```kotlin
+val aInt: Int? = a as? Int // return `null` if the attempt was not successful
+```
+- Collections of Nullable Type
+```kotlin
+val nullableList: List<Int?> = listOf(1, 2, null, 4)
+val intList: List<Int> = nullableList.filterNotNull()
+```
 ### 접근자
 - `public (default)` : 전역 프로젝트에 공개
 - `private` : 같은 파일내에 공개
@@ -185,8 +237,8 @@ var textView = findViewById(R.id.textView) as TextView
 textView.show() // ok
 textView.hide() // ok
 ```
-## 클래스
-### 클래스 표현
+### 클래스
+- 기본
 ```kotlin
 class Invoice {
 
@@ -228,23 +280,22 @@ class Customer {
 ```kotlin
 class Customer public @Inject constructor(name: String) { ... }
 ```
-### Data 클래스
-- 모든 var, val 변수의 Getter 제공
-- 모든 var 변수의 Setter를 제공
-- equals() / hashCode() / toString() / copy() 구현을 아름답게 제공
+- Data 클래스
+  - 모든 var, val 변수의 Getter 제공
+  - 모든 var 변수의 Setter를 제공
+  - equals() / hashCode() / toString() / copy() 구현을 아름답게 제공
 ```kotlin
 data class Customer(val name: String, var email: String)
 ```
-### Open 클래스
-- 코틀린의 모든 클래스는 기본적으로 final이라 상속이 불가능하다.
-- open 키워드를 class 앞에 붙여줌으로써 상속을 허용시킨다.
+- Open 클래스
+  - 코틀린의 모든 클래스는 기본적으로 final이라 상속이 불가능하다.
+  - open 키워드를 class 앞에 붙여줌으로써 상속을 허용시킨다.
 ```kotlin
 open class Base(p: Int)
 
 class Derived(p: Int) : Base(p)
 ```
-### Abstract 클래스
-- Java와 비슷
+- Abstract 클래스
 ```kotlin
 abstract class Base {
     abstract fun f()
@@ -256,8 +307,8 @@ class Derived() : Base() {
     }
 }
 ```
-### Nested 클래스
-- Outer클래스 멤버 참조가 `불가능`
+- Nested 클래스
+  - Outer클래스 멤버 참조가 `불가능`
 ```kotlin
 class Outer {
     private val bar: Int = 1
@@ -268,8 +319,8 @@ class Outer {
 
 val demo = Outer.Nested().foo() // == 2
 ```
-### Inner 클래스
-- Outer클래스 멤버 참조 `가능`
+- Inner 클래스
+  - Outer클래스 멤버 참조 `가능`
 ```kotlin
 class Outer {
     private val bar: Int = 1
@@ -280,18 +331,19 @@ class Outer {
 
 val demo = Outer().Inner().foo() // == 1
 ```
-### 익명 Inner 클래스
-`object`키워드를 사용하고 타입은 `interface`나 `abstract class`를 받는다.
-- `interface` : 이름 뒤에 ()를 붙이지 않는다. `View.OnClickListener`
+- 익명 Inner 클래스
+  - `object`키워드를 사용하고 타입은 `interface`나 `abstract class`를 받는다.
+  - `interface` : 이름 뒤에 ()를 붙이지 않는다. `View.OnClickListener`
+  - `abstract class` : 이름 뒤에 ()를 붙인다. `SimpleOnQueryTextListener()`
 ```kotiln
-button.setOnClickListener(object: View.OnClickListener {
+// interface
+button.setOnClickListener(object : View.OnClickListener {
     override fun onClick(view: View) {
         // ...
     }
 })
-```
-- `abstract class` : 이름 뒤에 ()를 붙인다. `SimpleOnQueryTextListener()`
-```kotlin
+
+// abstract class
 searchView.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
     override fun onQueryTextSubmit(query: String): Boolean {
         presenter.searchImage(query)
@@ -299,8 +351,7 @@ searchView.setOnQueryTextListener(object : SimpleOnQueryTextListener() {
     }
 })
 ```
-### Enum 클래스
-- Java와 별로 다르지 않다.
+- Enum 클래스
 ```kotlin
 enum class Direction {
     NORTH, SOUTH, WEST, EAST
@@ -311,9 +362,9 @@ enum class Color(val rgb: Int) {
     BLUE(0x0000FF)
 }
 ```
-### 클래스 위임 (Class Delegation)
-- 해당 클래스안에 by절 `뒤`에 오는 참조가 `private으로 저장`된다.
-- 해당 클래스안에 by절 `앞`에 오는 인터페이스의 `메소드를 자동 생성`한다.
+- 클래스 위임 (Class Delegation)
+  - 해당 클래스안에 by절 `뒤`에 오는 참조가 `private으로 저장`된다.
+  - 해당 클래스안에 by절 `앞`에 오는 인터페이스의 `메소드를 자동 생성`한다.
 ```kotlin
 interface Base {
     fun print()
@@ -333,7 +384,6 @@ fun main(args: Array<String>) {
     Derived(b).print() // prints 10
 }
 ```
-## Other
 ### Destructuring Declarations
 ```kotlin
 // class
@@ -349,7 +399,6 @@ for ((key, value) in map) {
     print("value is $value")
 }
 ```
-## Collections
 ### List
 - [mutableListOf](https://github.com/seojr/kotlin/blob/master/libraries/stdlib/src/kotlin/collections/Collections.kt#L96), [arrayListOf](https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib/src/kotlin/collections/Collections.kt#L101) 둘 다 ArrayList를 만들어 리턴
 - ArrayList보다 kotlin스타일로 리스트를 다루는 인터페이스가 구현되어 있는 MutableList를 사용하는 편이 더 나아보임.
@@ -398,7 +447,7 @@ set.toHashSet()
 set.toMutableSet()
 set.toSortedSet()
 ```
-## Ranges
+### Ranges
 ```kotlin
 for (i in 1..4) print(i) // prints "1234"
 for (i in 1..4 step 2) print(i) // prints "13"
@@ -407,7 +456,7 @@ for (i in 4 downTo 1 step 2) print(i) // prints "42"
 for (i in 1 until 10) println(i) // prints "123456789"
 (1..12 step 2).last // 11
 ```
-## Equality
+### Equality
 - Referential equality (`===`, `!==`)
 ```kotlin
 val a = Integer(10)
