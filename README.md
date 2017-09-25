@@ -334,7 +334,7 @@ val demo = Outer().Inner().foo() // == 1
   - `object`키워드를 사용하고 타입은 `interface`나 `abstract class`를 받는다.
   - `interface` : 이름 뒤에 ()를 붙이지 않는다. `View.OnClickListener`
   - `abstract class` : 이름 뒤에 ()를 붙인다. `SimpleOnQueryTextListener()`
-```kotiln
+```kotlin
 // interface
 button.setOnClickListener(object : View.OnClickListener {
     override fun onClick(view: View) {
