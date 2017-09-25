@@ -30,6 +30,25 @@ fun main(args: Array<String>) {
     a = 20 // 성공
 }
 ```
+### 함수 값 리턴의 간략화
+- 일반적인 함수 정의
+```kotlin
+fun maxOf(a: Int, b: Int): Int {
+    if (a > b) {
+        return a
+    } else {
+        return b
+    }
+}
+```
+- 간략하게 표현
+```kotlin
+fun maxOf(a: Int, b: Int): Int = if (a > b) a else b
+```
+- 더 간략하게 표현 (리턴 타입을 생략해도 추론 가능)
+```kotlin
+fun maxOf(a: Int, b: Int) = if (a > b) a else b
+```
 ### Nullsafe
 - Kotlin은 널 참조의 위험([The Billion Dollar Mistake](https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions))을 제거하기 위해 노력했다.
 - 아래와 같은 상황에서만 NPE(NullPointerException)를 만들 수 있다.
@@ -114,25 +133,6 @@ fun demo1(x: String?) {
 fun demo2(x: String) {
     print(x.length)
 }
-```
-### 함수 값 리턴의 간략화
-- 일반적인 함수 정의
-```kotlin
-fun maxOf(a: Int, b: Int): Int {
-    if (a > b) {
-        return a
-    } else {
-        return b
-    }
-}
-```
-- 간략하게 표현
-```kotlin
-fun maxOf(a: Int, b: Int): Int = if (a > b) a else b
-```
-- 더 간략하게 표현 (리턴 타입을 생략해도 추론 가능)
-```kotlin
-fun maxOf(a: Int, b: Int) = if (a > b) a else b
 ```
 ### For-Loop
 - List
