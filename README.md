@@ -294,7 +294,7 @@ open class Base(p: Int)
 
 class Derived(p: Int) : Base(p)
 ```
-- Abstract 클래스
+- Abstract 클래스 (open 붙일 필요 없음)
 ```kotlin
 abstract class Base {
     abstract fun f()
