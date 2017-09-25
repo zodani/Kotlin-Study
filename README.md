@@ -5,7 +5,7 @@
 - 클린 빌드 시에는 Java보다 조금 느리지만, 일반적인 개발 시나리오의 증분 빌드 시 성능이 좋다.
 - [Kotlin vs Java: Compilation speed](https://medium.com/keepsafe-engineering/kotlin-vs-java-compilation-speed-e6c174b39b5d)
 
-### 세미콜론(;) 안녕
+### 세미콜론 제거
 - 더 이상 세미콜론은 필요가 없다.
 ```kotlin
 fun main(args: Array<String>) {
@@ -332,4 +332,109 @@ fun main(args: Array<String>) {
     val b = BaseImpl(10)
     Derived(b).print() // prints 10
 }
+```
+## Other
+### Destructuring Declarations
+```kotlin
+// class
+data class Person(val name: String, val age: Int)
+fun main(args: Array<String>) {
+	val (name, age) = Person("Jee-ryong", 30)
+	print("My name is $name and I am $age years old.")
+}
+
+// map
+for ((key, value) in map) {
+    print("key is $key")
+    print("value is $value")
+}
+```
+## Collections
+### List
+- [mutableListOf](https://github.com/seojr/kotlin/blob/master/libraries/stdlib/src/kotlin/collections/Collections.kt#L96), [arrayListOf](https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib/src/kotlin/collections/Collections.kt#L101) 둘 다 ArrayList를 만들어 리턴
+- ArrayList보다 kotlin스타일로 리스트를 다루는 인터페이스가 구현되어 있는 MutableList를 사용하는 편이 더 나아보임.
+```kotlin
+val lists: List<Int> = listOf(1, 2, 3) // read only
+val lists: MutableList<Int> = mutableListOf(1, 2, 3) // read/write
+val lists: ArrayList<Int> = arrayListOf(1, 2, 3) // read/write
+```
+### Map
+```kotlin
+// new instance
+val map = mapOf("Korea" to 1, "Japan" to 2) // read only
+val map = mutableMapOf("Korea" to 1, "Japan" to 2) // read/write
+val map = linkedMapOf("Korea" to 1, "Japan" to 2)
+val map = hashMapOf("Korea" to 1, "Japan" to 2) 
+val map = sortedMapOf("Korea" to 1, "Japan" to 2)
+
+// use
+map.put("London", 3)
+map.get("Korea")
+map["Korea"]
+map.containsKey("Japan")
+map.toList()
+map.toMap()
+map.toMutableMap()
+map.toSortedMap()
+```
+### Set
+```kotlin
+// new instance
+val set = setOf("Korea", "Japan")
+val set = mutableSetOf("Korea", "Japan")
+val set = hashSetOf("Korea", "Japan")
+val set = linkedSetOf("Korea", "Japan")
+val set = sortedSetOf("Korea", "Japan")
+
+// use
+set.add("London")
+set.remove("London")
+set.contains("London")
+set.size
+set.toList()
+set.toMutableList()
+set.toSet()
+set.toHashSet()
+set.toMutableSet()
+set.toSortedSet()
+```
+## Ranges
+```kotlin
+for (i in 1..4) print(i) // prints "1234"
+for (i in 1..4 step 2) print(i) // prints "13"
+for (i in 4 downTo 1) print(i) // prints "4321"
+for (i in 4 downTo 1 step 2) print(i) // prints "42"
+for (i in 1 until 10) println(i) // prints "123456789"
+(1..12 step 2).last // 11
+```
+## Equality
+- Referential equality (`===`, `!==`)
+```kotlin
+val a = Integer(10)
+val b = a
+a === b // true
+a !== b // false
+
+val a = Integer(10)
+val b = Integer(10)
+a === b // false
+a !== b // true
+```
+- Structural equality (`==`, `!=`)
+```kotlin
+data class Person(val name: String, val age: Int)
+val person = Person("Jae-ryong", 20)
+val person2 = Person("Jae-ryong", 20)
+person == person2 // true
+person != person2 // false
+```
+- Arrays Equality (using infix funtions)
+  - [contentEquals]()
+```kotlin
+val hobbies = arrayOf("Hiking", "Chess")
+val hobbies2 = arrayOf("Hiking", "Chess")
+assertTrue(hobbies contentEquals hobbies2) // passed
+
+// 참고 - contentEquals는 미리 정의 된 infix함수이다.
+public infix inline fun <T> kotlin.Array<out T>.contentEquals(other: kotlin.Array<out T>): kotlin.Boolean
 ```
